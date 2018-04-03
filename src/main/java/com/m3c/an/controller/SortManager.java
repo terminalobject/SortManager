@@ -9,15 +9,18 @@ public class SortManager {
 
     public void sortArray() {
         DisplayManager displayManager = new DisplayManager();
-        Sorter sorter = SortFactory.getInstance();
+        try {
+            Sorter sorter = SortFactory.getInstance();
+            int[] arrayToSort = createArray(100);
 
-        int[] arrayToSort = createArray(10);
-        displayManager.displayUnsortedArray(sorter, arrayToSort);
-
-        long start = System.nanoTime();
-        int[] sortedArray = sorter.sortArray(arrayToSort);
-        long end = System.nanoTime();
-        displayManager.displaySorted(sortedArray,(end-start));
+            displayManager.displayUnsortedArray(sorter, arrayToSort);
+            long start = System.nanoTime();
+            int[] sortedArray = sorter.sortArray(arrayToSort);
+            long end = System.nanoTime();
+            displayManager.displaySorted(sortedArray, (end - start));
+        } catch (SortManagerException sme) {
+            displayManager.displayExceptionMessage(sme.getMessage());
+        }
     }
 
     private int[] createArray(int size) {

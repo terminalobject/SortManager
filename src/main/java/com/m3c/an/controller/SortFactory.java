@@ -1,33 +1,30 @@
 package com.m3c.an.controller;
-
 import com.m3c.an.sorters.BubbleSort;
 import com.m3c.an.sorters.MergeSort;
 import com.m3c.an.sorters.Sorter;
-
-import java.io.FileNotFoundException;
 import java.io.FileReader;
 import java.io.IOException;
 import java.util.Properties;
 
 public class SortFactory {
 
-    public static Sorter getInstance(){
-        try {
+    public static Sorter getInstance() throws SortManagerException{
+        try (FileReader fr = new FileReader("resources/factory.properties")) {
             Properties properties = new Properties();
-                properties.load(new FileReader("resources/factory.properties"));
-                String sorter = properties.getProperty("sorter");
-                switch (sorter) {
+            properties.load(fr);
+            String sorter = properties.getProperty("sorter");
+            switch (sorter) {
                     case "bubble":
                         return new BubbleSort();
                     case "merge":
                         return new MergeSort();
                     default:
-                    // TODO: throw new exception
+                        SortManagerException sme = new SortManagerException();
+                        sme.setMessage("Sorry, this sorter type is not available.");
+                        throw sme;
             }
-            System.out.println("SORTER: " + sorter);
         } catch (IOException e) {
-            e.printStackTrace();
+            throw new SortManagerException();
         }
-        return null;
     }
 }
