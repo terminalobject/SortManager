@@ -1,6 +1,5 @@
 package com.m3c.an.sorters;
 
-import com.m3c.an.BinaryTree;
 import com.m3c.an.controller.ElementNotFoundException;
 
 import java.util.ArrayList;
@@ -12,6 +11,13 @@ public class BTree implements BinaryTree {
 
     public BTree(int rootValue){
         this.RootElement = new Node(rootValue);
+    }
+
+    public BTree(int[] arrayOfValues) {
+        this.RootElement = new Node(arrayOfValues[0]);
+        for (int i = 1; i < arrayOfValues.length; i++) {
+            this.addElement(arrayOfValues[i]);
+        }
     }
 
     public Node getRoot() {
