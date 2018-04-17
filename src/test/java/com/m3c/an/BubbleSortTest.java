@@ -10,7 +10,7 @@ public class BubbleSortTest {
     public void TestBubbleSort() {
         BubbleSort bubbleSort = new BubbleSort();
         int[] array = {8, 4, 6, 2};
-        Assert.assertArrayEquals(array, bubbleSort.sortArray(array));
+        Assert.assertArrayEquals(new int[] {2, 4, 6, 8}, bubbleSort.sortArray(array));
     }
 
 }

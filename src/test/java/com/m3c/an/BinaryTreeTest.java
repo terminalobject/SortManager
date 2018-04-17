@@ -1,6 +1,7 @@
 package com.m3c.an;
 
-import com.m3c.an.ElementNotFoundException;
+import com.m3c.an.controller.ElementNotFoundException;
+import com.m3c.an.sorters.BTree;
 import org.junit.Assert;
 import org.junit.Test;
 

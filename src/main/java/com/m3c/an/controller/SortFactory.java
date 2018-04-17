@@ -9,8 +9,8 @@ import java.util.Properties;
 
 public class SortFactory {
 
-    public static Sorter getInstance() throws SortManagerException{
-        try (FileReader fr = new FileReader("resources/factory.properties")) {
+    public static Sorter getInstance(String filename) throws SortManagerException{
+        try (FileReader fr = new FileReader("resources/" + filename)) {
             Properties properties = new Properties();
             properties.load(fr);
             String sorter = properties.getProperty("sorter");
@@ -19,7 +19,7 @@ public class SortFactory {
                         return new BubbleSort();
                     case "merge":
                         return new MergeSort();
-                case "binary":
+                    case "binary":
                         return new BinarySort();
                     default:
                         SortManagerException sme = new SortManagerException();

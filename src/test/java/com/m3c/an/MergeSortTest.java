@@ -7,17 +7,17 @@ import org.junit.Test;
 
 public class MergeSortTest {
 
-    MergeSort mergeSort;
+    private MergeSort mergeSort;
 
     @Before
     public void setup() {
-        MergeSort mergeSort = new MergeSort();
+        mergeSort = new MergeSort();
     }
 
     @Test
     public void TestMergeSort() {
-        int[] array = {8, 4, 6, 2};
-        Assert.assertArrayEquals(array, mergeSort.sortArray(array));
+        int[] array = {11, 3, 7, 9, 5};
+        Assert.assertArrayEquals(new int[] {3, 5, 7, 9, 11}, mergeSort.sortArray(array));
     }
 
 }
