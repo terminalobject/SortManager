@@ -1,5 +1,5 @@
 package com.m3c.an.controller;
-
+import java.util.Arrays;
 import com.m3c.an.display.DisplayManager;
 import com.m3c.an.sorters.Sorter;
 import org.apache.log4j.PropertyConfigurator;
@@ -15,12 +15,14 @@ public class SortManager {
         DisplayManager displayManager = new DisplayManager();
         try {
             Sorter sorter = SortFactory.getInstance("factory.properties");
+            logger.info("Sorting method: " + sorter);
             int[] arrayToSort = createArray(100);
-
+            logger.info("Array to sort: " + Arrays.toString(arrayToSort));
             displayManager.displayUnsortedArray(sorter, arrayToSort);
             long start = System.nanoTime();
             int[] sortedArray = sorter.sortArray(arrayToSort);
             long end = System.nanoTime();
+            logger.info("Sorted array: " + Arrays.toString(sortedArray));
             displayManager.displaySorted(sortedArray, (end - start));
             logger.info("Sorting time: " + (end-start));
         } catch (SortManagerException sme) {

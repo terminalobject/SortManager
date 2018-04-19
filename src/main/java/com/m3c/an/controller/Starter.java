@@ -1,7 +1,8 @@
 package com.m3c.an.controller;
 
 /**
- * Hello world!
+ * Author: Alessandro Noiato
+ * Implement a sorting method manager for int[] arrays.
  *
  */
 public class Starter

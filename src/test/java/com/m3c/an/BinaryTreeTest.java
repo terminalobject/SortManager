@@ -45,7 +45,7 @@ public class BinaryTreeTest {
         BTree bTree = new BTree(5);
         int[] array = {1, 3, 4, 8, 10, 11};
         bTree.addElements(array);
-        Assert.assertEquals(true, bTree.findElement(3));
+        Assert.assertTrue(bTree.findElement(3));
     }
 
     @Test
@@ -80,7 +80,7 @@ public class BinaryTreeTest {
     public void TestGetSortedTreeAsc() {
         BTree bTree = new BTree(5);
         int[] array = {11, 3, 8, 4, 10, 7, 15};
-        List<Integer> arraySorted = new ArrayList<Integer>();
+        List<Integer> arraySorted = new ArrayList<>();
         arraySorted.add(3);
         arraySorted.add(4);
         arraySorted.add(5);
@@ -97,7 +97,7 @@ public class BinaryTreeTest {
     public void TestGetSortedTreeDesc() {
         BTree bTree = new BTree(5);
         int[] array = {11, 3, 8, 4, 10, 7, 15};
-        List<Integer> arraySorted = new ArrayList<Integer>();
+        List<Integer> arraySorted = new ArrayList<>();
         arraySorted.add(15);
         arraySorted.add(11);
         arraySorted.add(10);
@@ -108,5 +108,22 @@ public class BinaryTreeTest {
         arraySorted.add(3);
         bTree.addElements(array);
         Assert.assertEquals(arraySorted, bTree.getSortedTreeDesc());
+    }
+
+    @Test
+    public void TestDelete() {
+        BTree bTree = new BTree(5);
+        int[] array = {11, 3, 8, 4, 10, 7, 15};
+        bTree.addElements(array);
+        bTree.delete(3);
+        List<Integer> expectedArray = new ArrayList<>();
+        expectedArray.add(4);
+        expectedArray.add(5);
+        expectedArray.add(7);
+        expectedArray.add(8);
+        expectedArray.add(10);
+        expectedArray.add(11);
+        expectedArray.add(15);
+        Assert.assertEquals(expectedArray, bTree.getSortedTreeAsc());
     }
 }

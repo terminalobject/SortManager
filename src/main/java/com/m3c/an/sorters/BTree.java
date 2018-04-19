@@ -13,7 +13,7 @@ public class BTree implements BinaryTree {
         this.RootElement = new Node(rootValue);
     }
 
-    public BTree(int[] arrayOfValues) {
+    BTree(int[] arrayOfValues) {
         this.RootElement = new Node(arrayOfValues[0]);
         for (int i = 1; i < arrayOfValues.length; i++) {
             this.addElement(arrayOfValues[i]);
@@ -32,10 +32,9 @@ public class BTree implements BinaryTree {
         return getNumberOfElements(this.getRoot());
     }
 
-    public int getNumberOfElements(Node node) {
-        Node current = node;
+    private int getNumberOfElements(Node node) {
         if (node == null) return 0;
-        return 1 + getNumberOfElements(current.getLeft()) + getNumberOfElements(current.getRight());
+        return 1 + getNumberOfElements(node.getLeft()) + getNumberOfElements(node.getRight());
     }
 
     public void addElement(int element) {
@@ -62,8 +61,8 @@ public class BTree implements BinaryTree {
     }
 
     public void addElements(int[] elements) {
-        for (int i = 0; i < elements.length; i++) {
-            this.addElement(elements[i]);
+        for (int element : elements) {
+            this.addElement(element);
         }
     }
 
@@ -110,8 +109,47 @@ public class BTree implements BinaryTree {
         throw new ElementNotFoundException();
     }
 
+    public void delete(int value)
+    {
+        RootElement = deleteRec(RootElement, value);
+    }
+
+    private Node deleteRec(Node root, int value)
+    {
+        if (root == null)  return root;
+
+        if (value < root.getValue())
+            root.setLeft(deleteRec(root.getLeft(), value));
+        else if (value > root.getValue())
+            root.setRight(deleteRec(root.getRight(), value));
+        else
+        {
+            if (root.getLeft() == null)
+                return root.getRight();
+            else if (root.getRight() == null)
+                return root.getLeft();
+
+            root.setValue(minValueNode(root.getRight()));
+
+            root.setRight(deleteRec(root.getRight(), root.getValue()));
+        }
+
+        return root;
+    }
+
+    private int minValueNode(Node root)
+    {
+        int minimumValue = root.getValue();
+        while (root.getLeft() != null)
+        {
+            minimumValue = root.getLeft().getValue();
+            root = root.getLeft();
+        }
+        return minimumValue;
+    }
+
     public List<Integer> getSortedTreeAsc() {
-        return SortTreeAsc(this.getRoot(), new ArrayList<Integer>());
+        return SortTreeAsc(this.getRoot(), new ArrayList<>());
     }
 
     private List<Integer> SortTreeAsc(Node node, List<Integer> result) {
@@ -149,8 +187,9 @@ public class BTree implements BinaryTree {
         return candidate;
         }
 
+
     public List<Integer> getSortedTreeDesc() {
-        return SortTreeDesc(this.getRoot(), new ArrayList<Integer>());
+        return SortTreeDesc(this.getRoot(), new ArrayList<>());
     }
 
     private List<Integer> SortTreeDesc(Node node, List<Integer> result) {
@@ -166,10 +205,5 @@ public class BTree implements BinaryTree {
         }
 
         return result;
-    }
-
-    // TODO: implement deleteNode method.
-    public void deleteNode() {
-
     }
 }

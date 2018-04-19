@@ -22,7 +22,6 @@ public class DisplayManager {
         public void displayExceptionMessage(String message) {
             System.out.println(message);
 
-
     }
 
 }

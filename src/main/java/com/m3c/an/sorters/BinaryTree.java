@@ -4,9 +4,6 @@ import com.m3c.an.controller.ElementNotFoundException;
 
 import java.util.List;
 
-/**
- * Created by keith.dauris on 26/06/2017.
- */
 public interface BinaryTree {
     int getRootElement();
 

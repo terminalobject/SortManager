@@ -1,7 +1,7 @@
 package com.m3c.an.sorters;
 
 public class Node {
-    final private int value;
+    private int value; //Should have been final, but I needed to change it in order to implement deletion
     private Node left;
     private Node right;
 
@@ -11,6 +11,10 @@ public class Node {
 
     public int getValue() {
         return this.value;
+    }
+
+    public void setValue(int value) {
+        this.value = value;
     }
 
     public void setLeft(Node leftChild) {
